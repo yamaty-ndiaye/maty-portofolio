@@ -1,13 +1,987 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>maty-portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaye Maty Ndiaye - Portfolio Data Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(10, 22, 40, 0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin: 10px auto 30px;
+  max-width: 1400px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.navbar a {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #e8ebf3;
+  font-weight: 600;
+  font-size: 0.95em;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
+}
+
+.navbar a:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,212,255,0.55);
+  box-shadow: 0 10px 25px rgba(0,212,255,0.18);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a0b2e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        }
+
+       header h1 {
+  font-size: 3.6em;
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  color: #e8ebf3; /* blanc cassé */
+
+  text-shadow:
+    0 4px 14px rgba(0,0,0,0.6),
+    0 0 30px rgba(0,0,0,0.35);
+}
+
+
+
+
+        header p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #00d4ff;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+
+        .card p {
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: rgba(0, 212, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .info-box h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .info-box p {
+            font-size: 1.1em;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .skill-category h3 {
+            color: #ff00ff;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .skill-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: #00d4ff;
+            border-radius: 50%;
+            border: 3px solid #0a1628;
+        }
+
+        .timeline-date {
+            color: #ff00ff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-company {
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateX(10px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+        }
+
+        .project-title {
+            flex: 1;
+        }
+
+        .project-title h3 {
+            font-size: 1.8em;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        .project-subtitle {
+            color: #ff00ff;
+            font-size: 1.1em;
+        }
+
+        .project-description {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .detail-label {
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #e0e0e0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav class="navbar">
+  <div class="nav-inner">
+
+    <ul class="nav-links">
+      <li><a href="#recherche">Recherche</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#experience">Expériences</a></li>
+      <li><a class="nav-cta" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+        <header>
+
+            <h1>Yaye Maty Ndiaye</h1>
+            <p>Data Engineer</p>
+            <div>
+                <a href="#contact" class="btn">Contactez-moi</a>
+                <a href="#projects" class="btn btn-outline">Voir mes projets</a>
+            </div>
+        </header>
+
+        <section id="recherche">
+            <h2>🎓 Recherche Active</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3>Disponibilité</h3>
+                    <p><strong>À partir de Février 2026</strong></p>
+                    <p>Stage (CDI possible)</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📍</div>
+                    <h3>Localisation</h3>
+                    <p><strong>France</strong></p>
+                    <p>Mobilité géographique</p>
+                    <p>Remote possible</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3>Domaines recherchés</h3>
+                    <p>Data Engineering • Big Data</p>
+                    <p>Cloud Computing • DevOps</p>
+                    <p>Machine Learning Engineering</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+  <h2>💡 Centres d’intérêt techniques</h2>
+
+  <div class="card">
+    <h3>Passion pour la Data & la Transformation Numérique</h3>
+
+    <p style="color:#e0e0e0; font-size:1.1em; line-height:1.8;">
+      Passionnée par le Big Data et la transformation numérique, je conçois des solutions data
+      permettant de valoriser les données et d’accompagner la prise de décision.
+      J’interviens aussi bien sur la <strong>conception des pipelines</strong> que sur
+      le <strong>développement d’applications</strong> exploitant ces données.
+    </p>
+
+    <p style="color:#e0e0e0; font-size:1.1em; line-height:1.8; margin-top:18px;">
+      Mon intérêt pour le <strong>développement full-stack</strong> me permet de comprendre
+      l’ensemble du cycle d’une application, du backend et de la base de données
+      jusqu’à l’interface utilisateur, en lien avec les enjeux data.
+    </p>
+
+    <div class="tags" style="margin-top:30px;">
+      <span class="tag">📊 Big Data</span>
+      <span class="tag">☁️ Cloud</span>
+      <span class="tag">💻 Développement Full-Stack</span>
+    </div>
+  </div>
+</section>
+
+
+        <section id="profil">
+            <h2>👨‍💻 Profil</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>🎓 Formation</h3>
+                    <p><strong>ESIGELEC</strong></p>
+                    <p>École d'ingénieurs</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Spécialisation Big Data</p>
+                </div>
+                <div class="info-box">
+                    <h3>📚 Classes préparatoires scientifiques</h3>
+<p>Mathématiques • Physique</p>
+<p>Sciences de l’ingénieur • Informatique</p>
+
+                </div>
+                <div class="info-box">
+                    <h3>📍 Localisation</h3>
+                    <p><strong>Rouen</strong> (études)</p>
+                    <p><strong>Paris</strong> (résidence)</p>
+                      <p style="font-size:0.95em; margin-top:8px;">🚗 Permis B</p>
+
+                </div>
+                <div class="info-box">
+                    <h3>🎯 Objectif 2026</h3>
+                    <p><strong>Diplôme Ingénieur Généraliste</strong></p>
+                    <p>Data Engineering</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="langues">
+            <h2>🌍 Langues</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>🇫🇷 Français</h3>
+                    <p><strong>Langue maternelle</strong></p>
+                    <p>Lu, écrit, parlé</p>
+                    <div class="tags" style="margin-top: 15px; justify-content: center;">
+                        <span class="tag">📜 Certification Voltaire</span>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <h3>🇬🇧 Anglais</h3>
+                    <p><strong>Niveau avancé</strong></p>
+                    <p>Lu, écrit, parlé</p>
+                    <div class="tags" style="margin-top: 15px; justify-content: center;">
+                        <span class="tag">🎯 TOEIC 860 points</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>🛠️ Compétences Techniques</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>☁️ Cloud Computing</h3>
+                    <div class="skill-item">Google Cloud Platform (GCP)</div>
+                    <div class="skill-item">Amazon Web Services (AWS)</div>
+                    <div class="skill-item">IaaS • PaaS • SaaS</div>
+                    <div class="skill-item">Modèle de responsabilité partagée</div>
+                    <div class="skill-item">Migration Cloud</div>
+                </div>
+                <div class="skill-category">
+                    <h3>🐳 DevOps & Conteneurisation</h3>
+                    <div class="skill-item">Docker • Kubernetes</div>
+                    <div class="skill-item">CI/CD Pipelines</div>
+                    <div class="skill-item">Infrastructure as Code (IaC)</div>
+                    <div class="skill-item">Terraform • Ansible</div>
+                    <div class="skill-item">Git • GitHub Actions</div>
+                </div>
+                <div class="skill-category">
+                    <h3>📊 Big Data & Bases de données</h3>
+                    <div class="skill-item">SQL • PostgreSQL • MySQL</div>
+                    <div class="skill-item">NoSQL • MongoDB • Cassandra</div>
+                    <div class="skill-item">Talend • Apache Spark</div>
+                    <div class="skill-item">ETL • Data Pipelines</div>
+                    <div class="skill-item">Data Warehousing</div>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Développement & ML</h3>
+                    <div class="skill-item">Python • Java • C/C++</div>
+                    <div class="skill-item">JavaScript • React • Streamlit</div>
+                    <div class="skill-item">Machine Learning • Scikit-learn</div>
+                    <div class="skill-item">API REST • FastAPI</div>
+                    <div class="skill-item">Pandas • NumPy</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>💼 Mes Projets</h2>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🏦</div>
+                    <div class="project-title">
+                        <h3>SyLo - Structured Loan</h3>
+                        <p class="project-subtitle">Application de regroupement de crédits pour PME/ETI</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Application complète de structuration et regroupement de prêts. Architecture full-stack avec authentification, 
+                    pipeline de données financières, calculs mathématiques avancés (TRI, PNL), analyse de solvabilité automatisée, 
+                    et génération de rapports PDF. Déploiement avec tests automatisés (51 tests, 100% réussite).
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🎯 Architecture</div>
+                        <div class="detail-value">Full-stack, Pipeline de données, Tests automatisés</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 Stack</div>
+                        <div class="detail-value">Python, Streamlit, Pandas, NumPy, SciPy, Pytest</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">💾 Données</div>
+                        <div class="detail-value">Extraction Excel, ETL, Calculs financiers</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">✅ Qualité</div>
+                        <div class="detail-value">51 tests unitaires & intégration, 95% coverage</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Streamlit</span>
+                    <span class="tag">ETL</span>
+                    <span class="tag">Pytest</span>
+                    <span class="tag">Data Pipeline</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">💰</div>
+                    <div class="project-title">
+                        <h3>Comparateur de Prix</h3>
+                        <p class="project-subtitle">Application de comparaison de prix en temps réel</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Application web de comparaison de prix avec scraping de données, stockage en base de données, 
+                    analyse comparative et interface utilisateur interactive. Pipeline de données automatisé pour 
+                    récupérer et traiter les informations de prix de différentes sources.
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🎯 Fonctionnalités</div>
+                        <div class="detail-value">Scraping, Analyse, Comparaison temps réel</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 Technologies</div>
+                        <div class="detail-value">Python, Beautiful Soup, Requests, SQLite</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">💾 Base de données</div>
+                        <div class="detail-value">SQLite, Pandas pour l'analyse</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🌐 Interface</div>
+                        <div class="detail-value">Web scraping, API REST, Dashboard</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Web Scraping</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Data Analysis</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🏃</div>
+                    <div class="project-title">
+                        <h3>Running </h3>
+                        <p class="project-subtitle">Application de suivi d'activités sportives</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Conception et développement d’une application web permettant aux <strong>étudiants</strong> et au
+    <strong>personnel</strong> de se connecter à une plateforme et de <strong>gérer leurs créneaux d’entraînement</strong>.
+    Les utilisateurs peuvent <strong>consulter les disponibilités</strong>, <strong>réserver</strong>,
+    <strong>modifier</strong> ou <strong>annuler</strong> une séance. L’application repose sur un
+    <strong>serveur PHP</strong> et une <strong>base de données</strong> garantissant la persistance des données
+    (comptes, réservations, créneaux, rôles).
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🎯 Fonctionnalités</div>
+                        <div class="detail-value">Tracking GPS, Analyse performance, Statistiques</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 Stack</div>
+                        <div class="detail-value">Python, Pandas, Matplotlib, SQLite</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">📊 Visualisation</div>
+                        <div class="detail-value">Graphiques, Cartes, Dashboard interactif</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">💾 Données</div>
+                        <div class="detail-value">Time-series, Données géospatiales</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Data Viz</span>
+                    <span class="tag">Time Series</span>
+                    <span class="tag">SQLite</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🐦</div>
+                    <div class="project-title">
+                        <h3>Twitter API Analytics</h3>
+                        <p class="project-subtitle">Analyse de données Twitter via API</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Projet d'analyse de données Twitter utilisant l'API officielle. Collecte de tweets, 
+                    traitement de données textuelles, analyse de sentiments, extraction de tendances et 
+                    visualisation de données sociales. Pipeline ETL complet pour données en temps réel.
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🎯 Analyse</div>
+                        <div class="detail-value">Sentiments, Tendances, Statistiques</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 Technologies</div>
+                        <div class="detail-value">Twitter API, Python, NLP, Pandas</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">💾 Pipeline</div>
+                        <div class="detail-value">ETL temps réel, Stockage, Traitement</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">📊 Visualisation</div>
+                        <div class="detail-value">Dashboard, Graphiques, Word clouds</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">API REST</span>
+                    <span class="tag">ETL</span>
+                    <span class="tag">NLP</span>
+                    <span class="tag">Real-time Data</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">📡</div>
+                    <div class="project-title">
+                        <h3>Machine Learning RFID</h3>
+                        <p class="project-subtitle">Système de prédiction basé sur données RFID</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Projet de Machine Learning appliqué aux données RFID. Collecte de données capteurs, 
+                    prétraitement et nettoyage, feature engineering, entraînement de modèles de classification/régression, 
+                    optimisation des hyperparamètres et déploiement du modèle.
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🎯 ML</div>
+                        <div class="detail-value">Classification, Prédiction, Optimisation</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 Stack</div>
+                        <div class="detail-value">Python, Scikit-learn, Pandas, NumPy</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">📊 Data Processing</div>
+                        <div class="detail-value">Feature Engineering, Preprocessing, EDA</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🚀 Déploiement</div>
+                        <div class="detail-value">Model serving, API, Monitoring</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Scikit-learn</span>
+                    <span class="tag">Feature Engineering</span>
+                    <span class="tag">IoT</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🗄️</div>
+                    <div class="project-title">
+                        <h3>Projet NoSQL</h3>
+                        <p class="project-subtitle">Architecture de base de données distribuée</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Conception et implémentation d'une architecture de base de données NoSQL. Utilisation de MongoDB 
+                    et Neo4j pour différents cas d'usage. Modélisation de données non-relationnelles, 
+                    optimisation des requêtes, réplication et sharding pour la scalabilité.
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🎯 Architecture</div>
+                        <div class="detail-value">Distribuée, Scalable, Haute disponibilité</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 Technologies</div>
+                        <div class="detail-value">MongoDB, Neo4j</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">💾 Concepts</div>
+                        <div class="detail-value">Sharding, Réplication, CAP theorem</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">📊 Performance</div>
+                        <div class="detail-value">Optimisation requêtes, Indexation</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">NoSQL</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">Cassandra</span>
+                    <span class="tag">Distributed Systems</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">☁️</div>
+                    <div class="project-title">
+                        <h3>Veille Technologique Cloud</h3>
+                        <p class="project-subtitle">Étude approfondie des architectures cloud</p>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Veille technologique complète sur le cloud computing. Étude des modèles IaaS, PaaS, SaaS, 
+                    analyse du modèle de responsabilité partagée, conteneurisation avec Docker et Kubernetes, 
+                    stratégies de migration cloud, CI/CD, Infrastructure as Code, et architectures cloud-native.
+                </p>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">☁️ Cloud Models</div>
+                        <div class="detail-value">IaaS, PaaS, SaaS, Hybrid Cloud</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🐳 Conteneurisation</div>
+                        <div class="detail-value">Docker, Kubernetes, Orchestration</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🔧 DevOps</div>
+                        <div class="detail-value">CI/CD, IaC, Terraform, Ansible</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">🚀 Migration</div>
+                        <div class="detail-value">Stratégies cloud, Best practices</div>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">GCP</span>
+                    <span class="tag">AWS</span>
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">CI/CD</span>
+                    <span class="tag">IaC</span>
+                    <span class="tag">DevOps</span>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 40px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(102, 126, 234, 0.1)); border: 2px solid rgba(255, 0, 255, 0.3);">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="font-size: 40px;">🔒</div>
+                    <div>
+                        <h3 style="color: #ff00ff; margin-bottom: 10px;">Note professionnelle</h3>
+                        <p style="color: #e0e0e0;">
+                            La majorité de mes projets sont hébergés dans des repositories privés pour des raisons de confidentialité 
+                            académique et professionnelle. Le code source peut être partagé sur demande lors d'entretiens.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(102, 126, 234, 0.1)); border: 2px solid rgba(0, 212, 255, 0.3);">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="font-size: 40px;">💻</div>
+                    <div>
+                        <h3 style="color: #00d4ff; margin-bottom: 10px;">Activité GitHub</h3>
+                        <p style="color: #e0e0e0;">
+                            Mon profil public ne reflète qu'une partie de mon activité. La majorité de mon développement s'effectue 
+                            sur des repositories privés, projets académiques confidentiels et environnements d'entreprise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+  <h2>💼 Expériences Professionnelles</h2>
+
+  <div class="timeline">
+
+    <!-- STAGE DATA ANALYST -->
+    <div class="timeline-item">
+      <div class="timeline-date">📊 Juillet 2025 – Septembre 2025</div>
+      <div class="timeline-title">Data Analyst Stagiaire</div>
+      <div class="timeline-company">
+        Ministère de l’Économie, du Plan et de la Coopération — Dakar, Sénégal
+      </div>
+
+      <p style="color: #e0e0e0; margin-top: 10px;">
+        Exploitation des données internes de l’institution pour le suivi des projets en cours.
+        Conception de tableaux de bord Power BI présentant les indicateurs clés liés aux projets,
+        aux financements et aux bailleurs.
+      </p>
+
+      <p style="color: #e0e0e0; margin-top: 8px;">
+        Structuration, nettoyage et mise en cohérence des données afin de produire des rapports
+        visuels facilitant l’analyse et l’aide à la décision.
+      </p>
+
+      <div class="tags" style="margin-top: 15px;">
+        <span class="tag">Power BI</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Reporting</span>
+        <span class="tag">KPI</span>
+        <span class="tag">Aide à la décision</span>
+      </div>
+    </div>
+
+    <!-- STAGE DEVELOPPEMENT WEB -->
+    <div class="timeline-item">
+      <div class="timeline-date">🌐 Juillet 2023 – Août 2023</div>
+      <div class="timeline-title">Stagiaire Développement Web</div>
+      <div class="timeline-company">
+        DEFAR SCI — Dakar, Sénégal
+      </div>
+
+      <p style="color: #e0e0e0; margin-top: 10px;">
+        Développement d’un site web dynamique permettant aux utilisateurs de s’authentifier
+        et de gérer leurs activités via une interface dédiée.
+        Participation à la conception de la base de données et à l’implémentation
+        des fonctionnalités côté serveur.
+      </p>
+
+      <p style="color: #e0e0e0; margin-top: 8px;">
+        Mise en place des opérations de création, modification et suppression des données,
+        ainsi que déploiement de l’application sur serveur.
+      </p>
+
+      <div class="tags" style="margin-top: 15px;">
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Développement Web</span>
+        <span class="tag">Authentification</span>
+        <span class="tag">CRUD</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+        <section id="contact">
+            <h2>📧 Contact</h2>
+            <div class="card" style="text-align: center; padding: 50px;">
+                <h3 style="font-size: 1.8em; margin-bottom: 30px; color: #00d4ff;">Intéressé par mon profil ?</h3>
+                <p style="font-size: 1.2em; color: #e0e0e0; margin-bottom: 40px;">
+                    Je suis actuellement en recherche active de stage (CDI possible) à partir de février 2026.<br>
+                    N'hésitez pas à me contacter pour discuter de vos opportunités !
+                </p>
+                <div>
+                    <a href="mailto:ndiayeyayematy@gmail.com" class="btn">✉️ Envoyez-moi un email</a>
+                    <a href="tel:+33629200750" class="btn">📞 +33629200750</a>
+                    <a href="assets/CV-maty-stage.pdf" class="btn btn-outline">📄 Télécharger mon CV</a>
+                
+        </section>
+
+        <footer>
+            <p style="font-size: 1.1em; margin-bottom: 10px;">© 2026 Yaye Maty Ndiaye - Tous droits réservés</p>
+            <p style="color: #b0b0b0;">Data Engineer Student | Big Data | Cloud & DevOps</p>
+        </footer>
+    </div>
+</body>
 </html>
