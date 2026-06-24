@@ -46,6 +46,6 @@ J’ai créé ce portfolio pour regrouper mes projets et mettre en avant ce que 
 
 ## Recherche de stage
 
-📌 Je recherche activement un **stage de 4 à 6 mois à partir de février/mars 2026**, en France (mobilité + remote possible).
+📌 Je recherche activement un **CDD/CDI à partir de Septembre 2026**, en France (mobilité possible).
 
 © 2026 — Yaye Maty Ndiaye
